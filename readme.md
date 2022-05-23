@@ -2,6 +2,20 @@
 
 This composer plugin uses `WordPress.org API` to download WordPress core, plugins and themes.
 
+## Installation
+
+1. Add the plugin as a global composer requirement:
+
+```shell
+$ composer global require piotrpress/wordpress-composer
+```
+
+2. Allow the plugin execution:
+
+```shell
+$ composer config -g allow-plugins.piotrpress/wordpress-composer true
+```
+
 ## Example `composer.json` file
 
 ```json
@@ -11,12 +25,10 @@ This composer plugin uses `WordPress.org API` to download WordPress core, plugin
     "wordpress-plugin/akismet": "*",
     "wordpress-theme/twentytwentytwo": "*",
     
-    "piotrpress/wordpress-composer": "^1.0",
     "piotrpress/wordpress-installer": "^1.0"
   },
   "config": {
     "allow-plugins": {
-      "piotrpress/wordpress-composer": true,
       "piotrpress/wordpress-installer": true
     }
   }
