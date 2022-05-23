@@ -1,0 +1,31 @@
+{
+  "name": "piotrpress/wordpress-composer",
+  "type": "composer-plugin",
+  "license": "MIT",
+  "description": "This composer plugin uses WordPress.org API to download WordPress core, plugins and themes.",
+  "homepage": "https://github.com/PiotrPress/wordpress-composer",
+  "authors": [
+    {
+      "name": "Piotr Niewiadomski",
+      "homepage": "https://piotr.press"
+    }
+  ],
+  "keywords": [
+    "wordpress", "wordpress-core", "wordpress-theme", "wordpress-plugin", "wordpress-themes", "wordpress-plugins", "composer", "composer-plugin"
+  ],
+  "require": {
+    "php": ">=7.4",
+    "composer-plugin-api": "^2.0"
+  },
+  "extra": {
+    "class": "PiotrPress\\Composer\\WordPress\\Plugin"
+  },
+  "autoload": {
+    "psr-4": {
+      "PiotrPress\\Composer\\WordPress\\": "src/"
+    },
+    "classmap": [
+      "src"
+    ]
+  }
+}
