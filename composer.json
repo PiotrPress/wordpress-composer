@@ -18,8 +18,7 @@
     "composer-plugin-api": "^2.0"
   },
   "extra": {
-    "class": "PiotrPress\\Composer\\WordPress\\Plugin",
-    "plugin-modifies-downloads": true
+    "class": "PiotrPress\\Composer\\WordPress\\Plugin"
   },
   "autoload": {
     "psr-4": {
