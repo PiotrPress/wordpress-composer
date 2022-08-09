@@ -81,20 +81,25 @@ class Plugin implements PluginInterface {
                 return $versions;
 
             case 'wordpress-theme' :
-                $versions = $this->getData(
+                $data = $this->getData(
                     $this->getApiUrl() .
                     '/themes/info/1.1/?action=theme_information&request[fields][versions]=1&request[slug]=' .
                     $this->getSlug( $require )
                 );
-                return $versions[ 'versions' ] ?? [];
+                return $data[ 'versions' ] ?: [
+                    $data[ 'version' ] => $data[ 'download_link' ]
+                ];
 
             case 'wordpress-plugin' :
+            case 'wordpress-muplugin' :
                 $data = $this->getData(
                     $this->getApiUrl() .
                     '/plugins/info/1.2/?action=plugin_information&request[fields][versions]=1&request[slug]=' .
                     $this->getSlug( $require )
                 );
-                return $data[ 'versions' ] ?? [];
+                return $data[ 'versions' ] ?: [
+                    $data[ 'version' ] => $data[ 'download_link' ]
+                ];
 
             default :
                 return [];
