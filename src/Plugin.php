@@ -5,6 +5,7 @@ namespace PiotrPress\Composer\WordPress;
 use Composer\Plugin\PluginInterface;
 use Composer\Composer;
 use Composer\IO\IOInterface;
+use Composer\Package\Version\VersionParser;
 
 class Plugin implements PluginInterface {
     public function activate( Composer $composer, IOInterface $io ) {
@@ -24,7 +25,11 @@ class Plugin implements PluginInterface {
 
     protected function createPackage( string $require ) : array {
         $package = [];
+
         foreach ( $this->getVersions( $require ) as $version => $url ) {
+            try { ( new VersionParser )->normalize( $version ); }
+            catch ( \Exception $exception ) { continue; }
+
             $package[] = [
                 'name' => $require,
                 'type' => $this->getType( $require ),
@@ -63,8 +68,7 @@ class Plugin implements PluginInterface {
     }
 
     protected function getData( string $url ) : array {
-        $json = @\file_get_contents( $url );
-        return @\json_decode( $json, true ) ?? [];
+        return @\json_decode( @\file_get_contents( $url ), true ) ?? [];
     }
 
     protected function getVersions( string $require ) : array {
